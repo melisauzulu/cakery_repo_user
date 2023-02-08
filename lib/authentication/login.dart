@@ -90,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await sharedPreferences!.setString("uid", currentUser.uid);
         await sharedPreferences!.setString("email", snapshot.data()!["email"]);
         await sharedPreferences!.setString("name", snapshot.data()!["name"]);
+        await sharedPreferences!.setString("phone", snapshot.data()!["phone"]); //telefon numarası için eklendi.
         await sharedPreferences!.setString("photoUrl", snapshot.data()!["photoUrl"]);
 
         Navigator.pop(context);
