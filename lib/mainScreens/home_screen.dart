@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         ),
         centerTitle: true,
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: true, //drawer button
         
         ),
       drawer: MyDrawer(),
