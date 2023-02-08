@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+
+  // sliderda gözükecek fotoların eklendiği kısım
     final items = [
         "slider/cake_1.jpg",
         "slider/cake_2.jpg",
@@ -57,10 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ) ,
 
           title: Text(
-          // sellerın ismini top bar kısımına yazdırıyoruz
+            // sellerın ismini top bar kısımına yazdırıyoruz
 
             //welcome + name eklenecek !!!!!!!!!!!!!!!!!!!!!!!!!!!
-          sharedPreferences!.getString("name")!,
+            sharedPreferences!.getString("name")!,
 
         ),
         centerTitle: true,
@@ -77,6 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
+                  // MediaQuery.of(context).size--> there is equity in height according to the screen size
+                  // not fixed values
+
                   height: MediaQuery.of(context).size.height* .3,
                   width: MediaQuery.of(context).size.width,
                   child: CarouselSlider(
@@ -88,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                        enableInfiniteScroll: true,
                        reverse: false,
                        autoPlay: true,
-                       autoPlayInterval: Duration(seconds: 2),
-                       autoPlayAnimationDuration: Duration(milliseconds: 600),
+                       autoPlayInterval: const Duration(seconds: 2),
+                       autoPlayAnimationDuration: const Duration(milliseconds: 600),
                        autoPlayCurve: Curves.easeInOut,
                        enlargeCenterPage: true,
                        //enlargeFactor: 0.3,              

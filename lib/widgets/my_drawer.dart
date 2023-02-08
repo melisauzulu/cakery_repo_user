@@ -44,6 +44,7 @@ class MyDrawer extends StatelessWidget {
           const SizedBox(height:12),
 
           //Body Drawer
+          // dahsboardda sol taraftan açılan menünün bodysinin tanımlandığı kısım
 
           Container(
 
