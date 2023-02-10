@@ -56,9 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ) ,
 
+              
           title: Text(
+
+             
           // sellerın ismini top bar kısımına yazdırıyoruz
           sharedPreferences!.getString("name")!,
+          
 
         ),
         centerTitle: true,
