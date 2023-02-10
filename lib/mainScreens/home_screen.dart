@@ -67,11 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
               
           title: Text(
 
-
-             
-            //welcome + name eklenecek !!!!!!!!!!!!!!!!!!!!!!!!!!!
           // sellerın ismini top bar kısımına yazdırıyoruz
-          sharedPreferences!.getString("name")!,
+          "Welcome ${sharedPreferences!.getString("name")!}",
 
 
         ),
