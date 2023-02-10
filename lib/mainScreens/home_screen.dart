@@ -60,18 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
               
           title: Text(
-<<<<<<< HEAD
+
 
              
+            //welcome + name eklenecek !!!!!!!!!!!!!!!!!!!!!!!!!!!
           // sellerın ismini top bar kısımına yazdırıyoruz
           sharedPreferences!.getString("name")!,
-          
-=======
-            // sellerın ismini top bar kısımına yazdırıyoruz
 
-            //welcome + name eklenecek !!!!!!!!!!!!!!!!!!!!!!!!!!!
-            sharedPreferences!.getString("name")!,
->>>>>>> 41194b62b5fbfdc1595429734a209cedaf27152c
 
         ),
         centerTitle: true,
