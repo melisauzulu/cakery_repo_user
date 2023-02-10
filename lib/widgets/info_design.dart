@@ -44,6 +44,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
       
               ),
 
+
               const SizedBox(height: 10.0,),
               Text(
                 widget.model!.sellerName!,
