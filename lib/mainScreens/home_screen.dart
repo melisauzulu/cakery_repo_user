@@ -1,8 +1,14 @@
 import 'package:cakery_app_users_app/authentication/auth_screen.dart';
 import 'package:cakery_app_users_app/global/global.dart';
+import 'package:cakery_app_users_app/models/sellers.dart';
+import 'package:cakery_app_users_app/widgets/info_design.dart';
 import 'package:cakery_app_users_app/widgets/my_drawer.dart';
+import 'package:cakery_app_users_app/widgets/progress_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -134,6 +140,46 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ),
             ),
+
+          StreamBuilder <QuerySnapshot> //get all document from the sellers collection
+          (stream: FirebaseFirestore.instance
+          .collection("sellers")
+          .snapshots(),
+          builder: (context,snapshot){
+
+            return !snapshot.hasData //if data doesn't exist
+            ? SliverToBoxAdapter(child: Center(child:circularProgress(),),) //Show a circular progress
+            : SliverStaggeredGrid.countBuilder( //else display the sellers
+
+            crossAxisCount: 1,
+            staggeredTileBuilder:(c)=> StaggeredTile.fit(1) ,
+            itemBuilder: (context, index) {
+              Sellers sModel=Sellers.fromJson(
+                snapshot.data!.docs[index].data()! as Map <String,dynamic>
+                
+                );
+                
+                //Design for displaying sellers
+                return InfoDesignWidget(
+                  model:sModel,
+                  context: context,
+
+                  
+                  
+                  
+                  );
+
+         },
+
+            //Number of bakeries in total
+            itemCount: snapshot.data!.docs.length,
+
+            );
+          
+          }
+          ),
+
+
 
           ],
 
