@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+//Our model class 
+
 class Sellers{
 
 String? sellerName;
