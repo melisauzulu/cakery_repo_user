@@ -1,7 +1,7 @@
 import 'package:cakery_app_users_app/authentication/auth_screen.dart';
 import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/models/sellers.dart';
-import 'package:cakery_app_users_app/widgets/info_design.dart';
+import 'package:cakery_app_users_app/widgets/sellers_design.dart';
 import 'package:cakery_app_users_app/widgets/my_drawer.dart';
 import 'package:cakery_app_users_app/widgets/progress_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -65,15 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ) ,
 
               
-          title: Text(
+          title:const Text(
 
           // sellerın ismini top bar kısımına yazdırıyoruz
-          "Welcome ${sharedPreferences!.getString("name")!}",
-
-
+         "Cakery",
+            style: TextStyle(fontSize:40, fontFamily: "Signatra"),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: true, //drawer button
+
         
         ),
       drawer: MyDrawer(),
@@ -84,59 +83,63 @@ class _HomeScreenState extends State<HomeScreen> {
 
               child: Padding(
 
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  // MediaQuery.of(context).size--> there is equity in height according to the screen size
-                  // not fixed values
+                padding: const EdgeInsets.all(20.0),
 
-                  height: MediaQuery.of(context).size.height* .3,
-                  width: MediaQuery.of(context).size.width,
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                       height: MediaQuery.of(context).size.height* .3,
-                       aspectRatio: 16/9,
-                       viewportFraction: 0.8,
-                       initialPage: 0,
-                       enableInfiniteScroll: true,
-                       reverse: false,
-                       autoPlay: true,
-                       autoPlayInterval: const Duration(seconds: 2),
-                       autoPlayAnimationDuration: const Duration(milliseconds: 600),
-                       autoPlayCurve: Curves.easeInOut,
-                       enlargeCenterPage: true,
-                       //enlargeFactor: 0.3,              
-                       scrollDirection: Axis.horizontal,
-                  ),
+                  child: Container(
+                    // MediaQuery.of(context).size--> there is equity in height according to the screen size
+                    // not fixed values
 
-                
-
-                 items: items.map((index) {
-
-                    return Builder(builder: (BuildContext_context) {
-                    return Container(
+                    height: MediaQuery.of(context).size.height* .3,
                     width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-                    decoration: BoxDecoration(
-                      color:Colors.pink[100] 
-                      ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child:Image.asset(
-                        index, 
-                        fit: BoxFit.fill,
-                      ),
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                         height: MediaQuery.of(context).size.height* .4,
+                         aspectRatio: 16/9,
+                         viewportFraction: 0.8,
+                         initialPage: 0,
+                         enableInfiniteScroll: true,
+                         reverse: true,
+                         autoPlay: true,
+                         autoPlayInterval: const Duration(seconds: 2),
+                         autoPlayAnimationDuration: const Duration(milliseconds: 600),
+                         autoPlayCurve: Curves.easeInOut,
+                         enlargeCenterPage: true,
+
+
+                        //enlargeFactor: 0.3,
+                         scrollDirection: Axis.horizontal,
                     ),
 
-                      );
-                    });
 
-                  }).toList(),
 
-                ),
-              )
+                   items: items.map((index) {
+
+                      return Builder(builder: (BuildContext_context) {
+                      return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.symmetric(horizontal: 1.0),
+                      decoration: BoxDecoration(
+                        color:Colors.pink[100]
+                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child:Image.asset(
+                          index,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+
+                        );
+                      });
+
+                    }).toList(),
+
+                  ),
+              ),
+                )
 
             ),
-            ),
+
 
           StreamBuilder <QuerySnapshot> //get all document from the sellers collection
           (stream: FirebaseFirestore.instance
@@ -153,17 +156,18 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (context, index) {
               Sellers sModel=Sellers.fromJson(
                 snapshot.data!.docs[index].data()! as Map <String,dynamic>
-                
+
                 );
-                
+
                 //Design for displaying sellers
-                return InfoDesignWidget(
+                return SellersDesignWidget(
+                  // we are displaying all the sellers on the users app homescreen
                   model:sModel,
                   context: context,
 
-                  
-                  
-                  
+
+
+
                   );
 
          },
@@ -172,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: snapshot.data!.docs.length,
 
             );
-          
+
           }
           ),
 
