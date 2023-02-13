@@ -59,14 +59,6 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
                      ),
                 ),
 
-                Text(
-                  widget.model!.sellerEmail!,
-                  style:const TextStyle(
-                   color:Colors.black,
-                   fontSize:12,
-                  ),
-                ),
-
                      Divider(
 
                   height: 4,
