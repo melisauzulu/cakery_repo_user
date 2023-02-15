@@ -93,6 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
         await sharedPreferences!.setString("phone", snapshot.data()!["phone"]); //telefon numarası için eklendi.
         await sharedPreferences!.setString("photoUrl", snapshot.data()!["photoUrl"]);
 
+        List<String> userCartList = snapshot.data()!["userCart"].cast<String>();
+        await sharedPreferences!.setStringList("userCart", userCartList);
+
+
         Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
       }

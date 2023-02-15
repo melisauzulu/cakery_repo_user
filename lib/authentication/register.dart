@@ -169,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen>
   Future saveDataToFirestore(User currentUser) async{
     // this function basically we will pass user reviews from Firebase
 
-
+    //saving to the firestore database
     FirebaseFirestore.instance.collection("users").doc(currentUser.uid).set({
 
       "uid": currentUser.uid,
@@ -179,6 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       // register sayfasında phone olması gerektigini dusunuyorum
       "phone": phoneController.text.trim(),
       "status": "approved",
+      "userCart": ['garbage.value'],
 
 
 
@@ -190,6 +191,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       await sharedPreferences!.setString("email", currentUser.email.toString());
       await sharedPreferences!.setString("name", nameController.text.trim());
       await sharedPreferences!.setString("photoUrl", sellerImageUrl);
+      await sharedPreferences!.setStringList("userCart", ['garbage.value']); //empty cart - temporary list of items
 
   }
 
