@@ -1,3 +1,4 @@
+import 'package:cakery_app_users_app/mainScreens/item_detail_screen.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/models/sellers.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,11 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: ()
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c) => ItemDetailScreen(model: widget.model)));
+        //itema bastığımızda items detail screena gidiyor
+      },
 
       splashColor: Colors.pink[50],
       child:Padding(
