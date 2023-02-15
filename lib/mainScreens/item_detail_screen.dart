@@ -5,7 +5,8 @@ import 'package:number_inc_dec/number_inc_dec.dart';
 import '../assistantMethods/assistant_methods.dart';
 import '../models/items.dart';
 
-//user item screenden item detail screene geçiş yapıyor herhangi itema bastığında
+//user item screenden item detail screene
+// geçiş yapıyor herhangi itema bastığında
 class ItemDetailScreen extends StatefulWidget
 {
   final Items? model;
@@ -30,7 +31,8 @@ class _ItemDetailScreenState extends State<ItemDetailScreen>
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //seçilen itemın imageı yerleştirildi
+          //seçilen itemın image'ı yerleştirildi
+
           Image.network(widget.model!.thumbnailUrl.toString()),
 
           //item counter
