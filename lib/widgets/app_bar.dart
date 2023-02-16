@@ -1,4 +1,6 @@
+import 'package:cakery_app_users_app/assistantMethods/cart_Item_counter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget
 {
@@ -62,8 +64,8 @@ class _MyAppBarState extends State<MyAppBar> {
             ),
             Positioned(
                 child: Stack(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       Icons.brightness_1_rounded,
                       size: 20.0,
                       color: Colors.purpleAccent,
@@ -72,7 +74,15 @@ class _MyAppBarState extends State<MyAppBar> {
                       top: 3,
                       right: 4,
                       child: Center(
-                        child: Text("0", style: TextStyle(color: Colors.white, fontSize: 12),),
+                        child: Consumer<CartItemCounter>(
+                          builder: (context, counter, c){
+                            return Text(
+                              counter.count.toString(),
+                              style: const TextStyle(color: Colors.white, fontSize: 12),
+                            );
+                          },
+                        ),
+
                       ),
                     ),
 

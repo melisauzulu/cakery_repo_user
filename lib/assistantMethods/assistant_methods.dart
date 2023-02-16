@@ -1,7 +1,45 @@
+import 'package:cakery_app_users_app/assistantMethods/cart_Item_counter.dart';
 import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+
+
+// which is to check if the item is already  in the cart
+
+separateItemIDs(){
+
+  List<String> separateItemIDsList=[], defaultItemList=[];
+  int i=0;
+
+  // defaultItemList contains our items, which is already in the cart
+  defaultItemList = sharedPreferences!.getStringList("userCart")!;
+
+  for(i; i<defaultItemList.length; i++){
+
+    //56557657:7
+    // :7 this column counter
+    String item=defaultItemList[i].toString();
+    var pos = item.lastIndexOf(":"); //56557657:7 saving format
+
+           //56557657
+    String getItemId = (pos != -1) ? item.substring(0, pos) : item;
+
+    print("\nThis is itemID now = " + getItemId);
+
+    // we added the separate item to our this list, which is by the name separate item IDs list
+
+    separateItemIDsList.add(getItemId);
+
+  }
+
+  print("\n This is itemID now = " );
+  print(separateItemIDsList);
+
+  return separateItemIDsList;
+
+}
 
 
 //add to cart function
@@ -26,6 +64,7 @@ addItemToCart(String? foodItemId, BuildContext context, int itemCounter)
     sharedPreferences!.setStringList("userCart", tempList);
 
     //update the badge
+    Provider.of<CartItemCounter>(context, listen: false).displayCartListItemsNumber();
   });
 
 }

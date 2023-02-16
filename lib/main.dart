@@ -1,9 +1,11 @@
+import 'package:cakery_app_users_app/assistantMethods/cart_Item_counter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'global/global.dart';
 import 'splashScreen/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -25,13 +27,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Users App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (c)=> CartItemCounter()),
+
+      ],
+      child: MaterialApp(
+        title: 'Users App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+        ),
+        home: const MySplashScreen(),
       ),
-      home: const MySplashScreen(),
     );
   }
 }
