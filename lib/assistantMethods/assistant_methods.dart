@@ -67,4 +67,37 @@ addItemToCart(String? foodItemId, BuildContext context, int itemCounter)
     Provider.of<CartItemCounter>(context, listen: false).displayCartListItemsNumber();
   });
 
+
 }
+
+separateItemQuantities(){
+
+  List<int> separateItemQuantityList=[];
+  List<String> defaultItemList=[];
+  int i=1; //to retrieve data from 1st index and skip the garbage value
+
+  // defaultItemList contains our items, which is already in the cart
+  defaultItemList = sharedPreferences!.getStringList("userCart")!;
+
+  for(i; i<defaultItemList.length; i++){
+
+    //56557657:7
+    // :7 this column counter
+    String item=defaultItemList[i].toString();
+    
+   //:7
+       List<String> ListItemCharacters = item.split(":").toList();
+       var quanNumber = int.parse(ListItemCharacters[1].toString());
+
+    print("\nThis is Quantity Number now = " + quanNumber.toString());
+
+    // we added the separate item to our this list, which is by the name separate item IDs list
+
+    separateItemQuantityList.add(quanNumber);
+
+  }
+    print("\n This is Quantity List now = " );
+    print(separateItemQuantityList);
+
+  return separateItemQuantityList;
+  }
