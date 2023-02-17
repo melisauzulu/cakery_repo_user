@@ -28,7 +28,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen>
   Widget build(BuildContext context)
   {
     return Scaffold(
-      appBar: MyAppBar(),
+      appBar: MyAppBar(sellerUID: widget.model!.sellerUID),
       body: SingleChildScrollView(
 
         child: Column(
