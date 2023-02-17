@@ -1,11 +1,13 @@
 import 'package:cakery_app_users_app/assistantMethods/cart_Item_counter.dart';
+import 'package:cakery_app_users_app/mainScreens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget
 {
   final PreferredSizeWidget? bottom;
-  MyAppBar({this.bottom});
+  final String? sellerUID;
+  MyAppBar({this.bottom, this.sellerUID});
 
   @override
   State<MyAppBar> createState() => _MyAppBarState();
@@ -59,7 +61,7 @@ class _MyAppBarState extends State<MyAppBar> {
               icon: Icon(Icons.shopping_cart, color: Colors.white,),
               onPressed: (){
                 // send user to cart screen
-
+                Navigator.push(context, MaterialPageRoute(builder: (c) => CartScreen(sellerUID: widget.sellerUID )));
               },
             ),
             Positioned(
