@@ -1,3 +1,4 @@
+import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/authentication/auth_screen.dart';
 import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/models/sellers.dart';
@@ -43,6 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
         "slider/cake_19.jpg",
         "slider/cake_20.jpg",
     ];
+
+    @override
+  void initState() {
+    super.initState();
+
+    clearCartNow(context);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {

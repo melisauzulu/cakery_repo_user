@@ -1,6 +1,8 @@
+import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/models/menus.dart';
 import 'package:cakery_app_users_app/models/sellers.dart';
+import 'package:cakery_app_users_app/splashScreen/splash_screen.dart';
 import 'package:cakery_app_users_app/widgets/menus_design.dart';
 import 'package:cakery_app_users_app/widgets/sellers_design.dart';
 import 'package:cakery_app_users_app/widgets/my_drawer.dart';
@@ -9,6 +11,7 @@ import 'package:cakery_app_users_app/widgets/text_widget_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MenusScreen extends StatefulWidget {
 
@@ -23,7 +26,6 @@ class _MenusScreenState extends State<MenusScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
 
       appBar: AppBar(
         flexibleSpace:Container(
@@ -40,6 +42,17 @@ class _MenusScreenState extends State<MenusScreen> {
               )
           ),
         ) ,
+        
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: ()
+          {
+            clearCartNow(context);
+
+            Navigator.push(context, MaterialPageRoute(builder: (c) => const MySplashScreen()));
+
+          },
+        ),
         title: const Text(
          "Cakery",
           style: TextStyle(fontSize: 40, fontFamily: "Signatra"),

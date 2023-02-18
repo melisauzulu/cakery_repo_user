@@ -1,5 +1,6 @@
 import 'package:cakery_app_users_app/assistantMethods/cart_Item_counter.dart';
 import 'package:cakery_app_users_app/global/global.dart';
+import 'package:cakery_app_users_app/splashScreen/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -101,3 +102,25 @@ separateItemQuantities(){
 
   return separateItemQuantityList;
   }
+
+//clear cart function
+ clearCartNow(context)
+ {
+   //user will have the garbage value as in their cart
+   sharedPreferences!.setStringList("userCart", ['garbage.value']);
+   List<String>? emptyList = sharedPreferences!.getStringList("userCart");
+
+   FirebaseFirestore.instance
+       .collection("users")
+       .doc(firebaseAuth.currentUser!.uid)
+       .update({"userCart": emptyList}).then((value) 
+   {
+     //list saved locally 
+     sharedPreferences!.setStringList("userCart", emptyList!);
+     Provider.of<CartItemCounter>(context, listen: false).displayCartListItemsNumber();
+
+         
+   });
+
+
+ }
