@@ -1,5 +1,6 @@
 import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/assistantMethods/total_amount.dart';
+import 'package:cakery_app_users_app/mainScreens/address_screen.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/splashScreen/splash_screen.dart';
 import 'package:cakery_app_users_app/widgets/app_bar.dart';
@@ -16,7 +17,7 @@ import '../assistantMethods/cart_Item_counter.dart';
 class CartScreen extends StatefulWidget {
 
   final String? sellerUID;
-  const CartScreen({this.sellerUID});
+  CartScreen({this.sellerUID});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -161,16 +162,23 @@ class _CartScreenState extends State<CartScreen> {
                 backgroundColor: Colors.pink,
                 icon: const Icon(Icons.navigate_next),
                 onPressed:() {
-                  
-
-
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (c)=>AddressScreen(
+                            totalAmount: totalAmount.toDouble(),
+                            sellerUID: widget.sellerUID,
+                          ),
+                      ),
+                  );
 
                 } ,
 
               ),
             ),
 
-        ]),
+        ],
+      ),
       body: CustomScrollView(
         slivers: [
 

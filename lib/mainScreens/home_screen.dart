@@ -73,17 +73,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ),
             ) ,
+        elevation: 0.0,
+        centerTitle: true,
 
-              
+
           title:const Text(
 
           // sellerın ismini top bar kısımına yazdırıyoruz
          "Cakery",
-            style: TextStyle(fontSize:40, fontFamily: "Signatra"),
+            style: TextStyle(fontSize:40, letterSpacing: 3,color: Colors.white ,fontFamily: "Signatra"),
         ),
-        centerTitle: true,
-
-        
+        backgroundColor: Colors.pink,
         ),
       drawer: MyDrawer(),
 
