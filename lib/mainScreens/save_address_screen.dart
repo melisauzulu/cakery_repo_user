@@ -1,6 +1,12 @@
+import 'package:cakery_app_users_app/global/global.dart';
+import 'package:cakery_app_users_app/models/address.dart';
 import 'package:cakery_app_users_app/widgets/simple_app_bar.dart';
 import 'package:cakery_app_users_app/widgets/text_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 class SaveAddressScreen extends StatelessWidget {
 
@@ -11,19 +17,71 @@ class SaveAddressScreen extends StatelessWidget {
   final _state = TextEditingController();
   final _completeAddress = TextEditingController();
   final _locationController = TextEditingController();
-
   final formKey = GlobalKey<FormState>();
+  List<Placemark>? placemarks;
+  Position? position;
+
+  //function to get the location from user 
+  //for saving the address
+  getUserLocationAddress() async
+  {
+    Position newPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high
+    );
+
+    position = newPosition;
+
+    placemarks = await placemarkFromCoordinates(
+        position!.latitude, position!.longitude
+    );
+
+    Placemark pMark = placemarks![0];
+
+    String fullAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+
+    _locationController.text = fullAddress;
+    _flatNumber.text = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}';
+    _city.text = '${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}';
+    _state.text = '${pMark.country}';
+    _completeAddress.text = fullAddress;
+  }
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
       appBar:  SimpleAppBar(),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Save Address"),
         icon: const Icon(Icons.save),
-        onPressed: (){
+        onPressed: ()
+        {
           //save address info
+          if(formKey.currentState!.validate())
+          {
+           final model = Address(
+             name: _name.text.trim(),
+             phoneNumber: _phoneNumber.text.trim(),
+             flatNumber: _flatNumber.text.trim(),
+             city: _city.text.trim(),
+             state: _state.text.trim(),
+             fullAddress: _completeAddress.text.trim(),
+             lat: position!.latitude,
+             lgn: position!.longitude,
+
+           ).toJson();
+
+           FirebaseFirestore.instance.collection("users")
+               .doc(sharedPreferences!.getString("uid"))
+               .collection("userAddress")
+               .doc(DateTime.now().millisecondsSinceEpoch.toString())
+               .set(model).then((value)
+           {
+             Fluttertoast.showToast(msg: "New Address has been saved.");
+             formKey.currentState!.reset();
+           });
+          }
         },
       ),
       body: SingleChildScrollView(
@@ -86,6 +144,7 @@ class SaveAddressScreen extends StatelessWidget {
               ),
               onPressed: (){
                 // get my current location with address
+                getUserLocationAddress();
               },
             ),
             Form(
