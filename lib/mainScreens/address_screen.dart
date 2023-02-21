@@ -1,4 +1,5 @@
 import 'package:cakery_app_users_app/assistantMethods/address_changer.dart';
+import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/mainScreens/save_address_screen.dart';
 import 'package:cakery_app_users_app/models/address.dart';
 import 'package:cakery_app_users_app/widgets/address_design.dart';
@@ -8,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../global/global.dart';
 
 class AddressScreen extends StatefulWidget {
 
@@ -44,7 +44,7 @@ class _AddressScreenState extends State<AddressScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.all(8),

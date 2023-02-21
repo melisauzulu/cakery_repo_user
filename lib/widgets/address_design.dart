@@ -1,4 +1,5 @@
 import 'package:cakery_app_users_app/assistantMethods/address_changer.dart';
+import 'package:cakery_app_users_app/maps/maps.dart';
 import 'package:cakery_app_users_app/models/address.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -142,6 +143,11 @@ class _AddressDesignState extends State<AddressDesign>
               ),
               onPressed: ()
               {
+                MapsUtils.openMapWithPosition(widget.model!.lat!, widget.model!.lgn!);
+
+                // MapsUtils.openMapWithAddress(widget.model!.fullAddress!);
+
+
 
               },
             ),

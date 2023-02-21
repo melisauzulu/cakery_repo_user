@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/models/address.dart';
 import 'package:cakery_app_users_app/widgets/simple_app_bar.dart';
@@ -20,6 +18,14 @@ class SaveAddressScreen extends StatelessWidget {
   final _completeAddress = TextEditingController();
   final _locationController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  Position? position;
+  List<Placemark>? placeMarks;
+  String sellerImageUrl = "";
+  LocationPermission? permission; // !!!!!!!! ÖNEMLİ
+  String completeAddress = "";
+
+/* ALİNİN KOD KALSIN BURDA !!! BELKİ REVİZE YAPARIZ
   List<Placemark>? placemarks;
   Position? position;
 
@@ -47,6 +53,55 @@ class SaveAddressScreen extends StatelessWidget {
     _city.text = '${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}';
     _state.text = '${pMark.country}';
     _completeAddress.text = fullAddress;
+  }
+*/
+  Future<Position?> getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    Position newPosition = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    position = newPosition;
+
+    placeMarks = await placemarkFromCoordinates(
+      position!.latitude,
+      position!.longitude,
+    );
+
+    Placemark pMark = placeMarks![0];
+
+    String completeAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+
+    //'${pMark.thoroughfare}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea}, ${pMark.country}';
+
+    _locationController.text = completeAddress;
+
+    _flatNumber.text = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}';
+    _city.text = '${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}';
+    _state.text = '${pMark.country}';
+
+    _completeAddress.text = completeAddress;
+
   }
 
 
@@ -147,7 +202,7 @@ class SaveAddressScreen extends StatelessWidget {
               ),
               onPressed: () {
                 // get my current location with address
-                getUserLocationAddress();
+                getCurrentLocation();
               },
             ),
             Form(
