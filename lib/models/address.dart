@@ -18,7 +18,7 @@ class Address
     this.fullAddress,
     this.lat,
     this.lgn,
-});
+  });
 
   Address.fromJson(Map<String, dynamic> json){
     name = json['name'];

@@ -1,9 +1,9 @@
+import 'package:cakery_app_users_app/assistantMethods/address_changer.dart';
 import 'package:cakery_app_users_app/assistantMethods/cart_Item_counter.dart';
 import 'package:cakery_app_users_app/assistantMethods/total_amount.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'global/global.dart';
 import 'splashScreen/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (c)=> CartItemCounter()),
         ChangeNotifierProvider(create: (c)=> TotalAmount()),
+        ChangeNotifierProvider(create: (c)=> AddressChanger()),
 
       ],
       child: MaterialApp(
