@@ -1,4 +1,5 @@
 import 'package:cakery_app_users_app/assistantMethods/address_changer.dart';
+import 'package:cakery_app_users_app/mainScreens/placed_order_screen.dart';
 import 'package:cakery_app_users_app/maps/maps.dart';
 import 'package:cakery_app_users_app/models/address.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +140,7 @@ class _AddressDesignState extends State<AddressDesign>
             ElevatedButton(
               child: const Text("Check on Maps"),
               style: ElevatedButton.styleFrom(
-                primary: Colors.black54,
+                backgroundColor: Colors.green,
               ),
               onPressed: ()
               {
@@ -157,10 +158,20 @@ class _AddressDesignState extends State<AddressDesign>
                 ? ElevatedButton(
                       child: const Text("Proceed"),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.pinkAccent,
+                        backgroundColor: Colors.pinkAccent,
                       ),
                       onPressed: ()
                       {
+                        Navigator.push(
+                          context, MaterialPageRoute(
+                            builder: (c)=> PlacedOrderScreen(
+                              addressID: widget.addressID,
+                              totalAmount: widget.totalAmount,
+                              sellerUID: widget.sellerUID,
+                            )
+                        )
+                        );
+
 
 
                       },

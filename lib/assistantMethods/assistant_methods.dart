@@ -84,7 +84,7 @@ separateItemQuantities(){
 
     //56557657:7
     // :7 this column counter
-    String item=defaultItemList[i].toString();
+    String item = defaultItemList[i].toString();
     
    //:7
        List<String> ListItemCharacters = item.split(":").toList();
