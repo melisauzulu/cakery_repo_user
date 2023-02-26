@@ -47,7 +47,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 .collection("items")
                 .where("itemID", whereIn: separateOrderItemIDs((snapshot.data!.docs[index].data()! as Map<String,dynamic>) ["productIDs"] ))
                 .where("orderBy", whereIn: (snapshot.data!.docs[index].data()! as Map<String,dynamic> ) ["uid"])
-                .orderBy("publishedDate", descending: true)  //orderBy represents user id
+                .orderBy("publishDate", descending: true)  //orderBy represents user id
                 .get(), 
                 
                 builder: (c,snap){
