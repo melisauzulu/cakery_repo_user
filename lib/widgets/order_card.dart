@@ -47,7 +47,10 @@ class OrderCard extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index){
             Items model = Items.fromJson(data![index].data()!as Map<String, dynamic>);
-            return placedOrderDesignWidget(model, context, seperateQuantitiesList![index]);
+            return Padding(
+            padding:const EdgeInsets.only(bottom: 10.0), //add some space between items
+            child:placedOrderDesignWidget(model, context, seperateQuantitiesList![index]),
+            );
           },
         ),
 
@@ -63,7 +66,7 @@ Widget placedOrderDesignWidget(Items model,BuildContext context, seperateQuantit
     color:Colors.grey[200],
     child: Row(
       children: [
-        Image.network(model.thumbnailUrl!, width: 120,),
+        Image.network(model.thumbnailUrl!, width: 120, height:120, fit:BoxFit.cover),
         const SizedBox(width: 10.0,),
         Expanded(
           child: Column(
@@ -101,6 +104,9 @@ Widget placedOrderDesignWidget(Items model,BuildContext context, seperateQuantit
                       color: Colors.blue,
                       fontSize: 18.0,
                     ),
+                  ),
+                    const SizedBox(
+                    width: 20,
                   ),
                 ],
               ),
