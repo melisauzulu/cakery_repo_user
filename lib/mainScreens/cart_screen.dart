@@ -214,13 +214,16 @@ class _CartScreenState extends State<CartScreen> {
           
 
           // display cart items with quantity number
+          //this query is for displaying the items from the items collection from the cartlist 
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection("items")
                 .where("itemID", whereIn: separateItemIDs())
                 .orderBy("publishDate", descending: false)
                 .snapshots(),
+
             builder: (context, snapshot){
+
               return !snapshot.hasData
                   ? SliverToBoxAdapter(child: Center(child: circularProgress(),),)
                   :snapshot.data!.docs.length == 0
