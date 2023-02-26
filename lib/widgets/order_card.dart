@@ -47,7 +47,7 @@ class OrderCard extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index){
             Items model = Items.fromJson(data![index].data()!as Map<String, dynamic>);
-            return placedOrderDesignWidget(model, context, seperateQuantitiesList);
+            return placedOrderDesignWidget(model, context, seperateQuantitiesList![index]);
           },
         ),
 
@@ -69,6 +69,11 @@ Widget placedOrderDesignWidget(Items model,BuildContext context, seperateQuantit
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
+               const SizedBox(
+                height: 20,
+              ),
+              
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -98,6 +103,10 @@ Widget placedOrderDesignWidget(Items model,BuildContext context, seperateQuantit
                     ),
                   ),
                 ],
+              ),
+             
+              const SizedBox(
+                height: 20,
               ),
 
               Row(
