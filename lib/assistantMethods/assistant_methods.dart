@@ -7,6 +7,40 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 
+
+separateOrderItemIDs(oderIDs){
+
+  List<String> separateItemIDsList=[], defaultItemList=[];
+  int i=0;
+
+  // defaultItemList contains our items, which is already in the cart
+  defaultItemList =List<String>.from(oderIDs);
+
+  for(i; i<defaultItemList.length; i++){
+
+    //56557657:7
+    // :7 this column counter
+    String item=defaultItemList[i].toString();
+    var pos = item.lastIndexOf(":"); //56557657:7 saving format
+
+           //56557657
+    String getItemId = (pos != -1) ? item.substring(0, pos) : item;
+
+    print("\nThis is itemID now = " + getItemId);
+
+    // we added the separate item to our this list, which is by the name separate item IDs list
+
+    separateItemIDsList.add(getItemId);
+
+  }
+
+  print("\n This is itemID now = " );
+  print(separateItemIDsList);
+
+  return separateItemIDsList;
+
+}
+
 // which is to check if the item is already  in the cart
 
 separateItemIDs(){
@@ -70,7 +104,38 @@ addItemToCart(String? foodItemId, BuildContext context, int itemCounter)
 
 
 }
+separateOrderItemQuantities(orderIDs){
 
+  List<String> separateItemQuantityList=[];
+  List<String> defaultItemList=[];
+  int i=1; //to retrieve data from 1st index and skip the garbage value
+
+  // defaultItemList contains our items, which is already in the cart
+  defaultItemList = List<String>.from(orderIDs);
+
+  for(i; i<defaultItemList.length; i++){
+
+    //56557657:7
+    // :7 this column counter
+    String item = defaultItemList[i].toString();
+    
+   //:7
+       List<String> ListItemCharacters = item.split(":").toList();
+       var quanNumber = int.parse(ListItemCharacters[1].toString());
+
+    print("\nThis is Quantity Number now = " + quanNumber.toString());
+
+    // we added the separate item to our this list, which is by the name separate item IDs list
+
+    separateItemQuantityList.add(quanNumber.toString());
+
+  }
+    print("\n This is Quantity List now = " );
+    print(separateItemQuantityList);
+
+  return separateItemQuantityList;
+  }
+ 
 separateItemQuantities(){
 
   List<int> separateItemQuantityList=[];
