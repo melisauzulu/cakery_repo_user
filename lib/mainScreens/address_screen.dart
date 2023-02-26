@@ -26,7 +26,7 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(),
+      appBar: SimpleAppBar(title:"Cakery"),
       //body: SingleChildScrollView ()
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Add New Address"),
