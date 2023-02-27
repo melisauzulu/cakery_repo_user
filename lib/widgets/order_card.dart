@@ -1,3 +1,4 @@
+import 'package:cakery_app_users_app/mainScreens/order_details_screen.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        //todo
+        Navigator.push(context, MaterialPageRoute(builder: (c)=>OrderDetailsScreen(orderID: orderID)));
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -121,7 +122,7 @@ Widget placedOrderDesignWidget(Items model,BuildContext context, seperateQuantit
                     "x ",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 14,
+                      fontSize: 15,
                     ),
                   ),
                   Expanded(
