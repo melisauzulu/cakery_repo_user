@@ -1,7 +1,10 @@
 import 'package:cakery_app_users_app/authentication/auth_screen.dart';
 import 'package:cakery_app_users_app/global/global.dart';
+import 'package:cakery_app_users_app/mainScreens/address_screen.dart';
+import 'package:cakery_app_users_app/mainScreens/history_screen.dart';
 import 'package:cakery_app_users_app/mainScreens/home_screen.dart';
 import 'package:cakery_app_users_app/mainScreens/my_orders_screen.dart';
+import 'package:cakery_app_users_app/mainScreens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -104,9 +107,13 @@ class MyDrawer extends StatelessWidget {
 
                        ),
 
-                       onTap:(() {
-                         //For Later
-                       }) ,               
+                       onTap:() {
+                         Navigator.push(context, MaterialPageRoute(builder: (c) => HistoryScreen()));
+
+
+
+                       },
+
 
                    ),
                    const Divider(
@@ -122,11 +129,14 @@ class MyDrawer extends StatelessWidget {
 
                        ),
 
-                       onTap:(() {
-                         //For Later
-                       }) ,               
+                       onTap:() {
+                         Navigator.push(context, MaterialPageRoute(builder: (c) => SearchScreen()));
 
-                   ),
+                       },
+
+                       ) ,
+
+
 
                    const Divider(
                    height:10,
@@ -141,11 +151,13 @@ class MyDrawer extends StatelessWidget {
 
                        ),
 
-                       onTap:(() {
-                         //For Later
-                       }) ,               
+                       onTap:() {
+                         Navigator.push(context, MaterialPageRoute(builder: (c) => AddressScreen()));
 
-                   ),
+
+                       },
+                       ) ,
+
 
                    const Divider(
                    height:10,
