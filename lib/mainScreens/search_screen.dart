@@ -19,8 +19,10 @@ class _SearchScreenState extends State<SearchScreen>
   Future<QuerySnapshot>? restaurantsDocumentsList;
   String sellerNameText = "";
 
-  initSearchingRestaurant(String textEntered)
+  initSearchingRestaurant(String textEntered) async
   {
+    // is grater kısmını değiştirirsen arama kısmında sana farklı sonuçlar gösterebilir , test edilebilir !!!
+    // isGreaterThanOrEqualTo,  if it has something matching something small words similar also displayed those results
     restaurantsDocumentsList = FirebaseFirestore.instance
         .collection("sellers")
         .where("sellerName", isGreaterThanOrEqualTo: textEntered)
@@ -49,15 +51,18 @@ class _SearchScreenState extends State<SearchScreen>
         title: TextField(
           onChanged: (textEntered)
           {
+
             setState(() {
               sellerNameText = textEntered;
             });
+
             //init search
             initSearchingRestaurant(textEntered);
+
           },
           decoration: InputDecoration(
             hintText: "Search Bakery",
-            hintStyle: const TextStyle(color: Colors.white),
+            hintStyle: const TextStyle(color: Colors.white54),
             border: InputBorder.none,
             suffixIcon: IconButton(
               icon: const Icon(Icons.search_outlined),
