@@ -84,7 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
   //unless seller logout
   Future readDataAndSetDataLocally(User currentUser) async { 
 
-    await FirebaseFirestore.instance.collection("users").doc(currentUser.uid).get().then((snapshot) async{
+    await FirebaseFirestore.instance.collection("users")
+        .doc(currentUser.uid)
+        .get()
+        .then((snapshot) async{
 
       if(snapshot.exists) { // if this exists, we can save the data locally for the following key
         // then we are going to send the seller inside the app that is to the home screen

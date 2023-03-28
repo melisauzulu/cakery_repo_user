@@ -1,7 +1,9 @@
 import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/authentication/auth_screen.dart';
+import 'package:cakery_app_users_app/authentication/login.dart';
 import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/models/sellers.dart';
+import 'package:cakery_app_users_app/splashScreen/splash_screen.dart';
 import 'package:cakery_app_users_app/widgets/sellers_design.dart';
 import 'package:cakery_app_users_app/widgets/my_drawer.dart';
 import 'package:cakery_app_users_app/widgets/progress_bar.dart';
@@ -9,6 +11,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -45,11 +48,31 @@ class _HomeScreenState extends State<HomeScreen> {
         "slider/cake_20.jpg",
     ];
 
+    restrictBlockedUsersFromUsingApp() async {
+      await FirebaseFirestore.instance.collection("users")
+          .doc(firebaseAuth.currentUser!.uid)
+          .get().then((snapshot) {
+        if(snapshot.data()!["status"] == "approved"){
+
+          Fluttertoast.showToast(msg: "You have been blocked !");
+          firebaseAuth.signOut();
+          Navigator.push(context, MaterialPageRoute(builder: (c)=> MySplashScreen()));
+        }
+        else{
+          clearCartNow(context);
+
+        }
+
+      });
+
+    }
+
     @override
   void initState() {
     super.initState();
 
-    clearCartNow(context);
+
+    restrictBlockedUsersFromUsingApp();
   }
 
 
