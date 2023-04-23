@@ -40,6 +40,86 @@ separateOrderItemIDs(oderIDs){
   return separateItemIDsList;
 
 }
+Future<List<String>> cartItemsMethod() async {
+  final uid = firebaseAuth.currentUser!.uid;
+  final docSnapshot = await FirebaseFirestore.instance.collection("users").doc(uid).get();
+
+  if (docSnapshot.exists) {
+    final data = docSnapshot.data() as Map<String, dynamic>;
+    final userCart = data["userCart"] as List<dynamic>;
+    final cartItems = userCart.cast<String>().toList().sublist(1); // exclude first item
+    return cartItems;
+  } else {
+    return [];
+  }
+}
+
+
+Future<List<String>> cartItems() async {
+  // Get a reference to the current user's document in the "users" collection
+  DocumentReference userRef =
+  FirebaseFirestore.instance.collection("users").doc(firebaseAuth.currentUser!.uid);
+
+  // Fetch the user's document from Firebase Firestore
+  DocumentSnapshot userDoc = await userRef.get();
+
+  // Extract the "userCart" array from the document and exclude the first item
+  List<dynamic> userCart = userDoc.get("userCart").sublist(1);
+
+  // Convert the "userCart" array to a List<String>
+  List<String> cartItems =
+  userCart.map((item) => item.toString().split(":")[0]).toList();
+
+  // Print the list of cart items to the console
+  print(cartItems);
+
+  return cartItems;
+}
+
+
+seperateItemIDsDatabase(){
+  // Get a reference to the current user's document in the "users" collection
+DocumentReference userRef = FirebaseFirestore.instance.collection("users").doc(firebaseAuth.currentUser!.uid);
+List<String> separateItemIDsList2=[];
+// Fetch the user's document from Firebase Firestore
+userRef.get().then((doc) {
+  // Extract the "userCart" array from the document
+  List<dynamic> userCart = doc.get("userCart");
+
+  // Convert the "userCart" array to a List<String>
+  List<String> defaultItemList = userCart.map((item) => item.toString()).toList();
+  int i=0;
+  // Print the list of cart items to the console
+  print(defaultItemList);
+    for(i; i<defaultItemList.length; i++){
+      if(i==0){
+        continue;
+      }
+    //56557657:7
+    // :7 this column counter
+    String item=defaultItemList[i].toString();
+    var pos = item.lastIndexOf(":"); //56557657:7 saving format
+
+           //56557657
+    String getItemId = (pos != -1) ? item.substring(0, pos) : item;
+
+    print("\nThis is itemID now = " + getItemId);
+      separateItemIDsList2.add(getItemId);
+
+    // we added the separate item to our this list, which is by the name separate item IDs list
+      separateItemIDsList2.add(getItemId);
+
+  }
+  
+  print("\n This is itemID now = " );
+  print(separateItemIDsList2);
+
+  return separateItemIDsList2;
+
+}).catchError((error) {
+  print("Failed to fetch user cart: $error");
+});
+}
 
 // which is to check if the item is already  in the cart
 

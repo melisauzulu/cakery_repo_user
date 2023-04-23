@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Items {
@@ -14,6 +16,12 @@ class Items {
   String? status;
   int? price;
 
+  String? serving;
+  String? selectedFlavor;
+  String? selectedTopping;
+  String? selectedOrderType;
+  String? responseMessage;
+
   Items({
     this.menuId,
     this.sellerUID,
@@ -25,7 +33,18 @@ class Items {
     this.longDescription,
     this.status,
 
+    this.serving,
+    this.selectedFlavor,
+    this.selectedTopping,
+    this.selectedOrderType,
+    this.responseMessage,
+
+
 });
+
+Items.setSellerUID(String sellerUIDTemp ){
+  sellerUID =sellerUIDTemp;
+}
 
   Items.fromJson(Map<String, dynamic> json)
   {
@@ -39,6 +58,11 @@ class Items {
     longDescription = json['longDescription'];
     status = json['status'];
     price = json['price'];
+    serving = json['serving'];
+    selectedFlavor = json['selectedFlavor'];
+    selectedTopping = json['selectedTopping'];
+    selectedOrderType = json['selectedOrderType'];
+    responseMessage = json['responseMessage'];
   }
 
   Map<String, dynamic> toJson()
@@ -54,6 +78,11 @@ class Items {
     data['thumbnailUrl'] = thumbnailUrl;
     data['longDescription'] = longDescription;
     data['status'] = status;
+    data['selectedFlavor'] = selectedFlavor;
+    data['selectedTopping'] = selectedTopping;
+    data['selectedOrderType'] = selectedOrderType;
+    data['responseMessage'] = responseMessage;
+
 
     return data;
 

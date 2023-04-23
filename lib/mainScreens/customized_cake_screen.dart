@@ -324,25 +324,29 @@ class _CustomizedCakeScreenState extends State<CustomizedCakeScreen> {
             color: Colors.pink,
             thickness: 1,
           ),
-
-ListTile(
-  leading: const Icon(Icons.image, color: Colors.white,),
-  title: Container(
-    width: 250,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('Upload an image', style: TextStyle(color: Colors.white)),
-        ElevatedButton(
-          onPressed: () {
-            takeImage(context); // call takeImage method
-          },
-          child: const Text('Choose an image', style: TextStyle(color: Colors.white)),
-        ),
-      ],
-    ),
-  ),
-),
+          ListTile(
+            leading: const Icon(
+              Icons.image,
+              color: Colors.white,
+            ),
+            title: Container(
+              width: 250,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Upload an image',
+                      style: TextStyle(color: Colors.white)),
+                  ElevatedButton(
+                    onPressed: () {
+                      takeImage(context); // call takeImage method
+                    },
+                    child: const Text('Choose an image',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ],
+              ),
+            ),
+          ),
           ListTile(
             leading: const Icon(
               Icons.perm_device_information,
@@ -479,6 +483,7 @@ ListTile(
       });
     });
   }
+
   uploadImage(mImageFile) async {
     // WE cleared a reference to infer storage and inside the item folder
     // we want to put our file, reference to our child
@@ -500,62 +505,57 @@ ListTile(
   Widget build(BuildContext context) {
     return imageXFile == null ? CustomizedCakeScreen() : HomeScreen();
   }
-  
-  takeImage(mContext){
 
-    return showDialog(context: mContext,
-    builder: (context){
-      return  SimpleDialog(
-        title: const Text("Menu Image", style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold),),
-      children: [
-        SimpleDialogOption(
-          onPressed: CaptureImageWithCamera,
-          child: const Text(
-            "Capture with Camera",
-            style: TextStyle(color: Colors.grey),
+  takeImage(mContext) {
+    return showDialog(
+      context: mContext,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text(
+            "Menu Image",
+            style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold),
           ),
-        ),
-        SimpleDialogOption(
-          onPressed: pickImageFromGallery,
-          child: const Text(
-            "Select from Gallery",
-            style: TextStyle(color: Colors.grey),
-          ),
-        ),
-        SimpleDialogOption(
-          child: const Text(
-            "Cancel",
-            style: TextStyle(color: Colors.grey),
-          ),
-          onPressed: ()=> Navigator.pop(context),
-        ),
-
-
-
-      ],
-      );
-    },
-
-
+          children: [
+            SimpleDialogOption(
+              onPressed: CaptureImageWithCamera,
+              child: const Text(
+                "Capture with Camera",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            SimpleDialogOption(
+              onPressed: pickImageFromGallery,
+              child: const Text(
+                "Select from Gallery",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            SimpleDialogOption(
+              child: const Text(
+                "Cancel",
+                style: TextStyle(color: Colors.grey),
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
     );
   }
-  CaptureImageWithCamera() async {
 
+  CaptureImageWithCamera() async {
     Navigator.pop(context);
-    imageXFile=await _picker.pickImage(
+    imageXFile = await _picker.pickImage(
       source: ImageSource.camera,
       maxHeight: 720,
       maxWidth: 1280,
     );
     setState(() {
       imageXFile;
-
     });
-
-
   }
-  pickImageFromGallery() async {
 
+  pickImageFromGallery() async {
     Navigator.pop(context);
     imageXFile = await _picker.pickImage(
       source: ImageSource.gallery,
@@ -564,8 +564,6 @@ ListTile(
     );
     setState(() {
       imageXFile;
-
     });
-
   }
 }

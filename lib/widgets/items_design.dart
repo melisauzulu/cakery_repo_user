@@ -3,6 +3,10 @@ import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/models/sellers.dart';
 import 'package:flutter/material.dart';
 
+import '../mainScreens/CustomCarptim.dart';
+import '../mainScreens/TestCustom.dart';
+import '../mainScreens/customized_cake_screen.dart';
+
 
 
 class ItemsDesignWidget extends StatefulWidget {//this class will recieve these 2 parameters
@@ -25,6 +29,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
       onTap: ()
       {
         Navigator.push(context, MaterialPageRoute(builder: (c) => ItemDetailScreen(model: widget.model)));
+
         //itema bastığımızda items detail screena gidiyor
       },
 

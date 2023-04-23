@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/assistantMethods/total_amount.dart';
+import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/mainScreens/address_screen.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/splashScreen/splash_screen.dart';
@@ -24,7 +27,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
   List<int>? separateItemQuantityList;
   num totalAmount = 0;
 
@@ -36,9 +38,10 @@ class _CartScreenState extends State<CartScreen> {
     Provider.of<TotalAmount>(context, listen: false).displayTotalAmount(0);
 
 
-    separateItemQuantityList = separateItemQuantities();
+    //separateItemQuantityList = separateItemQuantities();
 
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -211,61 +214,85 @@ class _CartScreenState extends State<CartScreen> {
             }),
           ),
 
-          
 
           // display cart items with quantity number
           //this query is for displaying the items from the items collection from the cartlist 
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("items")
-                .where("itemID", whereIn: separateItemIDs())
-                .orderBy("publishDate", descending: true)
-                .snapshots(),
+          StreamBuilder<DocumentSnapshot>(
+            stream: FirebaseFirestore.instance.collection("users").doc(firebaseAuth.currentUser!.uid).snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return SliverToBoxAdapter(child: Center(child: circularProgress()),);
+              }
 
-            builder: (context, snapshot){
+              // Extract the "userCart" array from the document
+              List<dynamic> userCart = snapshot.data!.get("userCart");
 
-              return !snapshot.hasData
-                  ? SliverToBoxAdapter(child: Center(child: circularProgress(),),)
-                  :snapshot.data!.docs.length == 0
-                  ?// startBuildingCart()
-                      Container()
-                  :SliverList(
-                     delegate: SliverChildBuilderDelegate((context,index){
-                        Items model = Items.fromJson(
-                          snapshot.data!.docs[index].data()! as Map<String, dynamic>,
-                         );
+              return StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance.collection("items").snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return SliverToBoxAdapter(
+                      child: Center(
+                        child: Text("Error: ${snapshot.error}"),
+                      ),
+                    );
+                  }
 
-                        //calculate total amount
-                        if(index == 0)
-                        //case for first item on the cart
-                        {
-                          totalAmount =0;
-                          totalAmount = totalAmount + (model.price! * separateItemQuantityList![index]);
-                        }
-                        else
-                        {
-                          totalAmount = totalAmount + (model.price! * separateItemQuantityList![index]);
+                  if (!snapshot.hasData) {
+                    return SliverToBoxAdapter(
+                      child: Center(
+                        child: circularProgress(),
+                      ),
+                    );
+                  }
+                  List<String> cartItemIDs=[];
 
-                        }
+                  // Build a list of cart items based on the "userCart" array
+                  List<Items> cartItems = [];
+                  Iterable cartItemIds = userCart;
+                  for (var item in cartItemIds) {
+                    cartItemIDs.add(item.toString());
+                    String itemId = item.toString().split(":")[0]; // Extract the item ID from the cart item string
+                    var matchingItems = snapshot.data!.docs.where((doc) => doc.get("itemID") == itemId);
+                    if (matchingItems.isNotEmpty) {
+                      cartItems.add(Items.fromJson(matchingItems.first.data() as Map<String, dynamic>));
+                    }
+                  }
+                  if (cartItemIDs != null) {
+                    sharedPreferences?.setStringList("userCartDatabase", cartItemIDs);
+                  }
+                  List<String>? cartItemStrings2 = sharedPreferences!.getStringList("userCartDatabase");
 
-                        if(snapshot.data!.docs.length - 1 == index)
-                        {
-                          WidgetsBinding.instance!.addPostFrameCallback((timeStamp)
-                          {
-                            //display total amount
-                           Provider.of<TotalAmount>(context, listen: false).displayTotalAmount(totalAmount.toDouble());
-                          });
-                        }
-
-                      return CartItemDesign(
-                         model: model,
-                         context: context,
-                         quanNumber: separateItemQuantityList![index],
-                      );
-                    },
-                      childCount: snapshot.hasData ? snapshot.data!.docs.length: 0,
-                    ),
-                  );
+                  print(cartItemStrings2);
+                  // Display the cart items and calculate the total amount
+                  double totalAmount = 0;
+                  if (cartItems.isNotEmpty) {
+                    for (var i = 0; i < cartItems.length; i++) {
+                      totalAmount += cartItems[i].price!;
+                    }
+                    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                      // Display the total amount
+                      Provider.of<TotalAmount>(context, listen: false).displayTotalAmount(totalAmount);
+                    });
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        return CartItemDesign(
+                          model: cartItems[index],
+                          context: context,
+                          //TODO: this sets the item quantity of many items çok benzeri seller order tarafında var
+                            //DONE! FIXED
+                          quanNumber: int.parse(separateOrderItemQuantities(cartItemIDs)[index])
+                          //quanNumber: separateOrderItemQuantities[index],
+                        );
+                      }, childCount: cartItems.length),
+                    );
+                  } else {
+                    return SliverToBoxAdapter(
+                      child: Container(),
+                    );
+                  };
+                },
+              );
             },
           ),
         ],
