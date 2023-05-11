@@ -117,225 +117,227 @@ class _CustomCarptimState extends State<CustomCarptim> {
       ),
       body: Center(
         child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (imageXFile == null)
-                ElevatedButton(
-                  child: const Text(
-                    "Add Photo",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (imageXFile == null)
+                  ElevatedButton(
+                    child: const Text(
+                      "Add Photo",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.pink),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.pink),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      takeImage(context);
+                    },
+                  )
+                else
+                  Container(
+                    height: 230,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Center(
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            image: FileImage(File(imageXFile!.path)),
+                            fit: BoxFit.cover,
+                          )),
+                        ),
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    takeImage(context);
+                ListTile(
+                  leading: const Icon(
+                    Icons.title,
+                    color: Colors.white,
+                  ),
+                  title: Container(
+                    width: 250,
+                    child: TextField(
+                      style: const TextStyle(color: Colors.black),
+                      controller: titleController,
+                      decoration: const InputDecoration(
+                        hintText: "Item title",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+                const Divider(
+                  color: Colors.pink,
+                  thickness: 1,
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.perm_device_information,
+                    color: Colors.white,
+                  ),
+                  title: Container(
+                    width: 250,
+                    child: TextField(
+                      // menu bilgisinin girildiği kısım
+                      style: const TextStyle(color: Colors.black),
+                      controller: shortInfoController,
+                      decoration: const InputDecoration(
+                        hintText: "Custom Cake Description",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+                const Divider(
+                  color: Colors.pink,
+                  thickness: 1,
+                ),
+                DropdownButton<String>(
+                  value: selectedSize,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedSize = newValue!;
+                    });
                   },
-                )
-              else
-                Container(
-                  height: 230,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Center(
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: FileImage(File(imageXFile!.path)),
-                          fit: BoxFit.cover,
-                        )),
+                  items: sizeOptions.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                const Divider(
+                  color: Colors.pink,
+                  thickness: 1,
+                ),
+                DropdownButton<String>(
+                  value: selectedFlavor,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedFlavor = newValue!;
+                    });
+                  },
+                  items: flavorOptions.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                const Divider(
+                  color: Colors.pink,
+                  thickness: 1,
+                ),
+                DropdownButton<String>(
+                  value: selectedTopping,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedTopping = newValue!;
+                    });
+                  },
+                  items: toppingOptions.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                const Divider(
+                  color: Colors.pink,
+                  thickness: 1,
+                ),
+                DropdownButton<String>(
+                  value: selectedOrderType,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedOrderType = newValue!;
+                    });
+                  },
+                  items: orderOptions.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                //TODO: ADD QUANTİTY INFO
+                ElevatedButton(
+                    child: const Text(
+                      "Send Cake For Approval",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 25,
                       ),
                     ),
-                  ),
-                ),
-              ListTile(
-                leading: const Icon(
-                  Icons.title,
-                  color: Colors.white,
-                ),
-                title: Container(
-                  width: 250,
-                  child: TextField(
-                    style: const TextStyle(color: Colors.black),
-                    controller: titleController,
-                    decoration: const InputDecoration(
-                      hintText: "Item title",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              const Divider(
-                color: Colors.pink,
-                thickness: 1,
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.perm_device_information,
-                  color: Colors.white,
-                ),
-                title: Container(
-                  width: 250,
-                  child: TextField(
-                    // menu bilgisinin girildiği kısım
-                    style: const TextStyle(color: Colors.black),
-                    controller: shortInfoController,
-                    decoration: const InputDecoration(
-                      hintText: "Custom Cake Description",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              const Divider(
-                color: Colors.pink,
-                thickness: 1,
-              ),
-              DropdownButton<String>(
-                value: selectedSize,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedSize = newValue!;
-                  });
-                },
-                items: sizeOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-              const Divider(
-                color: Colors.pink,
-                thickness: 1,
-              ),
-              DropdownButton<String>(
-                value: selectedFlavor,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedFlavor = newValue!;
-                  });
-                },
-                items: flavorOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-              const Divider(
-                color: Colors.pink,
-                thickness: 1,
-              ),
-              DropdownButton<String>(
-                value: selectedTopping,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedTopping = newValue!;
-                  });
-                },
-                items: toppingOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-              const Divider(
-                color: Colors.pink,
-                thickness: 1,
-              ),
-              DropdownButton<String>(
-                value: selectedOrderType,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedOrderType = newValue!;
-                  });
-                },
-                items: orderOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-              //TODO: ADD QUANTİTY INFO
-              ElevatedButton(
-                  child: const Text(
-                    "Send Cake For Approval",
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 50,
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.pink),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.pink),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
-                  ),
-                  onPressed: () {
+                    onPressed: () {
 
-                    /* MEL: 
+                      /* MEL:
 
-                    1-Check if item already exists in cart.
-                    2-Add to cart
-                  
-                    */
-                    
-                    //TODO: If cake already on approval this can cause an error so check same cake
-                    validateUploadForm();
+                      1-Check if item already exists in cart.
+                      2-Add to cart
+
+                      */
+
+                      //TODO: If cake already on approval this can cause an error so check same cake
+                      validateUploadForm();
+
+                        /*
+                       int itemCounter=1;
+                    List<String> separateItemIDsList = separateItemIDs();
+                    separateItemIDsList.contains(uniqueIdName)
+                        ? Fluttertoast.showToast(msg: "Item is already in cart.")
+                        : validateUploadForm();
+                      */
+
 
                       /*
-                     int itemCounter=1;
-                  List<String> separateItemIDsList = separateItemIDs();
-                  separateItemIDsList.contains(uniqueIdName)
-                      ? Fluttertoast.showToast(msg: "Item is already in cart.")
-                      : validateUploadForm();
+                      setModel();
+
+                   //1-check if the item exists already in cart
+                   // we assign that list to our  this list, which is why them separate item id list
+                   List<String> separateItemIDsList = separateItemIDs();
+                   //we can say if the seven item id list contains the item already, then it means that product is already
+                   //item ID does not contain the counter
+
+                   separateItemIDsList.contains(modelX?.itemID)
+                       ? Fluttertoast.showToast(msg: "Item is already in cart.")
+                       :
+
+                   //2- call add to cart function
+                   addItemToCart(modelX?.itemID, context, 1);
                     */
-                      
 
-                    /*
-                    setModel();
+                    //validateUploadForm();
+                    //addItemToCart(uniqueIdName,context,1);
 
-                 //1-check if the item exists already in cart
-                 // we assign that list to our  this list, which is why them separate item id list
-                 List<String> separateItemIDsList = separateItemIDs();
-                 //we can say if the seven item id list contains the item already, then it means that product is already
-                 //item ID does not contain the counter
 
-                 separateItemIDsList.contains(modelX?.itemID)
-                     ? Fluttertoast.showToast(msg: "Item is already in cart.")
-                     :
-
-                 //2- call add to cart function
-                 addItemToCart(modelX?.itemID, context, 1);
-                  */
-
-                  //validateUploadForm();
-                  //addItemToCart(uniqueIdName,context,1);
-                  
-
-                  },
-                )
-            ],
+                    },
+                  )
+              ],
+            ),
           ),
         ),
       ),

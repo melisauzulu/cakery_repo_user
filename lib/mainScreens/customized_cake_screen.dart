@@ -560,7 +560,7 @@ class _CustomizedCakeScreenState extends State<CustomizedCakeScreen> {
     imageXFile = await _picker.pickImage(
       source: ImageSource.gallery,
       maxHeight: 720,
-      maxWidth: 1280,
+      maxWidth: 1080,
     );
     setState(() {
       imageXFile;

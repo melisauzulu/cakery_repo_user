@@ -4,7 +4,7 @@ import 'package:cakery_app_users_app/models/sellers.dart';
 import 'package:flutter/material.dart';
 
 import '../mainScreens/CustomCarptim.dart';
-import '../mainScreens/TestCustom.dart';
+//import '../mainScreens/TestCustom.dart';
 import '../mainScreens/customized_cake_screen.dart';
 
 
@@ -37,21 +37,21 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
       child:Padding(
         padding: const EdgeInsets.all(5.0), //bakeryler arası mesafe
         child: Container(
-            height:300,
+            height:330,
             width: MediaQuery.of(context).size.width,
             child:SingleChildScrollView(
               child: Column(
                 children: [
                   Divider(
 
-                    height: 4,
+                    height: 3,
                     thickness: 3,
                     color:Colors.pink[100],
 
                   ),
                   Image.network(
                     widget.model!.thumbnailUrl!,
-                    height:250,
+                    height:260,
                     fit:BoxFit.cover,
 
                   ),
@@ -71,7 +71,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                     widget.model!.shortInfo!,
                    style:const TextStyle(
                      color:Colors.black,
-                     fontSize:12,
+                     fontSize:15,
                    ),
                    ),
 

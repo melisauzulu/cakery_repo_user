@@ -31,7 +31,7 @@ class _MenusDesignWidgetState extends State<MenusDesignWidget> {
         padding: const EdgeInsets.all(5.0), //bakeryler arası mesafe
 
           child: Container(
-              height:300,
+              height:310,
               width: MediaQuery.of(context).size.width,
               child:SingleChildScrollView(
                 child: Column(
@@ -46,7 +46,7 @@ class _MenusDesignWidgetState extends State<MenusDesignWidget> {
                     ),
                    Image.network(
                      widget.model!.thumbnailUrl!,
-                     height:250,
+                     height:240,
                      fit:BoxFit.cover,
 
                     ),
@@ -57,7 +57,7 @@ class _MenusDesignWidgetState extends State<MenusDesignWidget> {
                         widget.model!.menuTitle!,
                         style:const TextStyle(
                           color:Colors.black,
-                          fontSize:15,
+                          fontSize:18,
                           fontFamily: "Kiwi",
                         ),
                     ),
@@ -65,7 +65,7 @@ class _MenusDesignWidgetState extends State<MenusDesignWidget> {
                     widget.model!.menuInfo!,
                     style:const TextStyle(
                     color:Colors.black,
-                    fontSize:12,
+                    fontSize:15,
                       ),
                     ),
 

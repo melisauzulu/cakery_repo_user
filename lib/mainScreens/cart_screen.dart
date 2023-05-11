@@ -290,13 +290,14 @@ class _CartScreenState extends State<CartScreen> {
                     return SliverToBoxAdapter(
                       child: Container(),
                     );
-                  };
+                  }
                 },
               );
             },
           ),
         ],
       ),
+
 
     );
   }
