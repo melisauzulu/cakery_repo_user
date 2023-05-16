@@ -180,8 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       "phone": phoneController.text.trim(),
       "status": "approved",
       "userCart": ['garbage.value'],
-
-
+      "customCart": [],
 
     });
 

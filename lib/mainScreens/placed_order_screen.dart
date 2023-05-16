@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+
 class PlacedOrderScreen extends StatefulWidget {
   String? addressID;
   double? totalAmount;
@@ -54,6 +55,7 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
         "orderID": orderId,
     }).whenComplete(() {
       clearCartNow(context);
+      clearCustomCartNow(context,sharedPreferences!.getString("uid").toString() ,widget.sellerUID.toString());
       setState(() {
         orderId="";
         Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomeScreen()));
@@ -125,4 +127,5 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
       ),
     );
   }
+
 }

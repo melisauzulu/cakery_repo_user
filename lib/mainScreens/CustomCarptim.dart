@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as storageRef;
+import 'package:number_inc_dec/number_inc_dec.dart';
 
 import '../global/global.dart';
 import '../models/sellers.dart';
@@ -35,6 +36,7 @@ class _CustomCarptimState extends State<CustomCarptim> {
   TextEditingController shortInfoController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController priceController = TextEditingController(); //MEL: price için de bir controller oluşturdum.
+  TextEditingController counterTextEditingController = TextEditingController();
 
   final List<String> flavorOptions = [
     'Vanilla',
@@ -274,6 +276,17 @@ class _CustomCarptimState extends State<CustomCarptim> {
                     );
                   }).toList(),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: NumberInputPrefabbed.roundedButtons(
+                    controller: counterTextEditingController,
+                    incDecBgColor: Colors.pink,
+                    min: 1,
+                    max: 9,
+                    initialValue: 1, //default seçilen item sayısı
+                    buttonArrangement: ButtonArrangement.incRightDecLeft,
+                  ),
+                ),
                 //TODO: ADD QUANTİTY INFO
                 ElevatedButton(
                     child: const Text(
@@ -490,6 +503,7 @@ class _CustomCarptimState extends State<CustomCarptim> {
         "responseMessage": "waiting",
         "thumbnailUrl": downloadUrl,
         "price": 0,
+        "quantity":int.parse(counterTextEditingController.text),
          //MEL: Price info da database'e yazılsın.
       });
     }).then((value) {

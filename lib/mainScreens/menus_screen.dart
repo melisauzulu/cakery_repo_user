@@ -30,6 +30,13 @@ class MenusScreen extends StatefulWidget {
 }
 
 class _MenusScreenState extends State<MenusScreen> {
+
+  void initState() {
+    super.initState();
+    // Initialization code that only runs once
+    clearCartNow(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -27,6 +27,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  String? sellerUID;
   List<int>? separateItemQuantityList;
   num totalAmount = 0;
 
@@ -132,7 +133,7 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
       floatingActionButton: Row(
-        
+
         mainAxisAlignment: MainAxisAlignment.spaceAround, //there will be 2 buttons on the bottom-they'll have space in between
         children:[
           const SizedBox(width: 12 ,),
@@ -145,14 +146,16 @@ class _CartScreenState extends State<CartScreen> {
                 icon: const Icon(Icons.clear_all),
                 onPressed:() {
                   //call clearCartNow function 
-                  
+
                   clearCartNow(context);
+                  clearCustomCartNow(context,sharedPreferences!.getString("uid").toString() ,widget.sellerUID.toString());
+
 
                   Navigator.push(context, MaterialPageRoute(builder: (c) => const MySplashScreen()));
 
                   //display message
                   Fluttertoast.showToast(msg: "Cart has been cleared. ");
-                  
+
 
                 } ,
 
@@ -226,6 +229,7 @@ class _CartScreenState extends State<CartScreen> {
 
               // Extract the "userCart" array from the document
               List<dynamic> userCart = snapshot.data!.get("userCart");
+              List<dynamic> customCart = snapshot.data!.get("customCart");
 
               return StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance.collection("items").snapshots(),
@@ -258,12 +262,34 @@ class _CartScreenState extends State<CartScreen> {
                       cartItems.add(Items.fromJson(matchingItems.first.data() as Map<String, dynamic>));
                     }
                   }
-                  if (cartItemIDs != null) {
-                    sharedPreferences?.setStringList("userCartDatabase", cartItemIDs);
-                  }
+
                   List<String>? cartItemStrings2 = sharedPreferences!.getStringList("userCartDatabase");
 
                   print(cartItemStrings2);
+
+
+                  Iterable customCartItemIds = customCart;
+                  for (var item in customCartItemIds) {
+                    if(widget.sellerUID!=item.toString().split(":")[2]){
+                      continue;
+                    }
+                    List<String> parts = item.split(':');
+                    String? result;
+                    // take the first two insted of first three
+                    if (parts.length >= 3) {
+                      result = '${parts[0]}:${parts[1]}';
+                    }
+                    cartItemIDs.add(result!);
+                    String itemId = item.toString().split(":")[0]; // Extract the item ID from the cart item string
+
+                    var matchingItems = snapshot.data!.docs.where((doc) => doc.get("itemID") == itemId);
+                    if (matchingItems.isNotEmpty) {
+                      cartItems.add(Items.fromJson(matchingItems.first.data() as Map<String, dynamic>));
+                    }
+                  }
+                  if (cartItemIDs != null) {
+                    sharedPreferences?.setStringList("userCartDatabase", cartItemIDs);
+                  }
                   // Display the cart items and calculate the total amount
                   double totalAmount = 0;
                   if (cartItems.isNotEmpty) {
@@ -279,8 +305,6 @@ class _CartScreenState extends State<CartScreen> {
                         return CartItemDesign(
                           model: cartItems[index],
                           context: context,
-                          //TODO: this sets the item quantity of many items çok benzeri seller order tarafında var
-                            //DONE! FIXED
                           quanNumber: int.parse(separateOrderItemQuantities(cartItemIDs)[index])
                           //quanNumber: separateOrderItemQuantities[index],
                         );

@@ -188,7 +188,7 @@ separateOrderItemQuantities(orderIDs){
 
   List<String> separateItemQuantityList=[];
   List<String> defaultItemList=[];
-  int i=1; //to retrieve data from 1st index and skip the garbage value
+  int i=0; //to retrieve data from 1st index and skip the garbage value
 
   // defaultItemList contains our items, which is already in the cart
   defaultItemList = List<String>.from(orderIDs);
@@ -198,7 +198,9 @@ separateOrderItemQuantities(orderIDs){
     //56557657:7
     // :7 this column counter
     String item = defaultItemList[i].toString();
-    
+    if(item=="garbage.value"){
+      continue;
+    }
    //:7
        List<String> ListItemCharacters = item.split(":").toList();
        var quanNumber = int.parse(ListItemCharacters[1].toString());
@@ -264,8 +266,49 @@ separateItemQuantities(){
      sharedPreferences!.setStringList("userCart", emptyList!);
      Provider.of<CartItemCounter>(context, listen: false).displayCartListItemsNumber();
 
-         
    });
-
-
  }
+
+
+Future<void> clearCustomCartNow(context,String userUID ,String sellerUID) async{
+  try {
+    // Get the current user's UID
+
+    // Fetch the user's customCart field from Firestore
+    DocumentSnapshot userSnapshot =
+    await FirebaseFirestore.instance.collection('users').doc(userUID).get();
+
+    // Check if the user document exists
+    if (userSnapshot.exists) {
+      // Get the customCart field as a List<dynamic>
+      List<dynamic> customCart =(userSnapshot.data() as Map<String, dynamic>)['customCart'];
+
+      for(int i=0;i<customCart.length;i++){
+        String sellerid=customCart[i].toString().split(":")[2];
+        if(sellerid != sellerUID){
+          continue;
+        }
+        customCart.removeAt(i);
+        i--; // Decrement i to account for the removed element
+      }
+
+      // Update the customCart list in Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userUID)
+          .update({'customCart': customCart});
+
+      // Custom cart updated successfully
+      // Perform any additional actions or show a success message
+      print('Custom cart cleared successfully!');
+    } else {
+      // User document does not exist
+      // Handle the error or show an appropriate message
+      print('User document does not exist.');
+    }
+  } catch (error) {
+    // Error occurred while performing the operation
+    // Handle the error or show an appropriate message
+    print('Error occurred: $error');
+  }
+}

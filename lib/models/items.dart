@@ -21,6 +21,7 @@ class Items {
   String? selectedTopping;
   String? selectedOrderType;
   String? responseMessage;
+  int? quantity;
 
   Items({
     this.menuId,
@@ -38,6 +39,7 @@ class Items {
     this.selectedTopping,
     this.selectedOrderType,
     this.responseMessage,
+    this.quantity
 
 
 });
@@ -63,6 +65,7 @@ Items.setSellerUID(String sellerUIDTemp ){
     selectedTopping = json['selectedTopping'];
     selectedOrderType = json['selectedOrderType'];
     responseMessage = json['responseMessage'];
+    quantity = json['quantity'];
   }
 
   Map<String, dynamic> toJson()
@@ -82,6 +85,7 @@ Items.setSellerUID(String sellerUIDTemp ){
     data['selectedTopping'] = selectedTopping;
     data['selectedOrderType'] = selectedOrderType;
     data['responseMessage'] = responseMessage;
+    data['quantity'] = quantity;
 
 
     return data;
