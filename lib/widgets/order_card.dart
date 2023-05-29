@@ -30,10 +30,10 @@ class OrderCard extends StatelessWidget {
         decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.black12,
-                Colors.white54,
+                Colors.pinkAccent,
+                Colors.blueAccent,
               ],
-              begin: const FractionalOffset(0.0, 0.0),
+              begin: const FractionalOffset(1.0, 1.0),
               end: const FractionalOffset(2.0, 2.0),
               stops: [0.0, 1.0],
               tileMode: TileMode.clamp,
