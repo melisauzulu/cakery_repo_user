@@ -33,7 +33,6 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
           "orderTime": orderId,
           "isSuccess": true,
           "sellerUID": widget.sellerUID,
-          "riderUID": "",
           "status": "normal",
           "orderID": orderId,
 
@@ -50,7 +49,6 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
         "orderTime": orderId,
         "isSuccess": true,
         "sellerUID": widget.sellerUID,
-        "riderUID": "",
         "status": "normal",
         "orderID": orderId,
     }).whenComplete(() {
