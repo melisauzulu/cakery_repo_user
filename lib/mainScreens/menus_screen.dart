@@ -1,5 +1,6 @@
 import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/global/global.dart';
+import 'package:cakery_app_users_app/mainScreens/home_screen.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/models/menus.dart';
 import 'package:cakery_app_users_app/models/sellers.dart';
@@ -45,8 +46,8 @@ class _MenusScreenState extends State<MenusScreen> {
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
               colors: [
+                Colors.pinkAccent,
                 Colors.white54,
-                Colors.grey,
               ],
               begin: const FractionalOffset(0.0, 0.0),
               end: const FractionalOffset(2.0, 2.0),
@@ -60,7 +61,7 @@ class _MenusScreenState extends State<MenusScreen> {
               clearCartNow(context);
 
               Navigator.push(context,
-                  MaterialPageRoute(builder: (c) => const MySplashScreen()));
+                  MaterialPageRoute(builder: (c) => const HomeScreen()));
             },
           ),
           title: const Text(

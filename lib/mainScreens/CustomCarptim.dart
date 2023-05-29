@@ -292,8 +292,8 @@ class _CustomCarptimState extends State<CustomCarptim> {
                     child: const Text(
                       "Send Cake For Approval",
                       style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 25,
+                        color: Colors.white,
+                        fontSize: 20,
                       ),
                     ),
                     style: ButtonStyle(
