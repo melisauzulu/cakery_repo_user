@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
           await sharedPreferences!.setString("uid", currentUser.uid);
           await sharedPreferences!.setString("email", snapshot.data()!["email"]);
           await sharedPreferences!.setString("name", snapshot.data()!["name"]);
-          await sharedPreferences!.setString("phone", snapshot.data()!["phone"]); //telefon numarası için eklendi.
+          await sharedPreferences!.setString("phone", snapshot.data()!["phone"]); //telefon numarası için eklendi
           await sharedPreferences!.setString("photoUrl", snapshot.data()!["photoUrl"]);
 
           List<String> userCartList = snapshot.data()!["userCart"].cast<String>();
@@ -174,21 +174,15 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 20,),
           ElevatedButton(
-            // bu kısımda flutter kendi düzenleme yaptı satırların yeri degisik gelebilir ayni kod
-            //sadece karmaşa olmasın diye flutter düzenledi
+
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.pink[300],
               padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 10),
             ),
 
-
             onPressed: (){
 
             formValidaton();
-
-
-
-
 
             },
 

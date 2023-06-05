@@ -79,7 +79,7 @@ class _CustomizedCakeScreenState extends State<CustomizedCakeScreen> {
               ),
             ),
             onPressed: uploading ? null : () => validateUploadForm(),
-            // we are cheking that if uploading is true there and doing nothing means nothing else do validateUploadForm
+            // we are checking that if uploading is true there and doing nothing means nothing else do validateUploadForm
           ),
         ],
       ),
@@ -103,7 +103,7 @@ class _CustomizedCakeScreenState extends State<CustomizedCakeScreen> {
             ),
           ),
           const Divider(
-            // çizgi ekler araya
+            // çizgi ekler
             color: Colors.pink,
             thickness: 1,
           ),

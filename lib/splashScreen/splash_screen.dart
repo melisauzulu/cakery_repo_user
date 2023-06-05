@@ -80,7 +80,6 @@ class _MySplashScreenState extends State<MySplashScreen> {
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,
-                      // family ismini pubspec.yaml'daki isimden aldik
                       fontFamily: "Acme",
                       letterSpacing: 3,
                     ),

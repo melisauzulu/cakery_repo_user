@@ -24,7 +24,7 @@ class MapsUtils{
     String query = Uri.encodeComponent(fullAddress);
     String googleMapUrl = "https://www.google.com/maps/search/?api=1&query=$query";
 
-    // if(await canLaunch(googleMapUrl)){ BU DA YAZILABİLİR BURAYA FARKETMEZ !!
+    // if(await canLaunch(googleMapUrl)){  !!
     // Bİ HATA ÇIKARSA BUNU YAZIN
 
     // ignore: deprecated_member_use

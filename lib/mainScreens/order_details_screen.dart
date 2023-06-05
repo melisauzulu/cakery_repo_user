@@ -55,7 +55,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     child: Align(
                       alignment: Alignment.centerRight, // toplam tutarın görüneceği kısım
                       child: Text(
-                        "€ " + dataMap["totalAmount"].toString(),
+                        "€ "  + dataMap["totalAmount"].toString(),
                         //"Total Amount = " + "€ " + dataMap["totalAmount"].toString(), veya böylede olabilir
                         style: const TextStyle(
                           fontSize: 25,

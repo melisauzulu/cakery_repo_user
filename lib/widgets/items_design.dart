@@ -88,10 +88,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                 ],),
             )
 
-
         ),
-
-
 
       ),
     );

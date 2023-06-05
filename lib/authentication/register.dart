@@ -34,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen>
 
 
   String sellerImageUrl = "";
-  LocationPermission? permission; // !!!!!!!! ÖNEMLİ
+  LocationPermission? permission;
 
 
 
@@ -63,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       if(passwordController.text == confirmpasswordController.text){
 
 
-        // comfirm passwordunu doğrulama kısmını boş olmamasını kontrol ediyoruz
+        // confirm passwordunu doğrulama kısmını boş olmamasını kontrol ediyoruz
         if(confirmpasswordController.text.isNotEmpty && emailController.text.isNotEmpty && nameController.text.isNotEmpty && phoneController.text.isNotEmpty ){
           //start uploading image
           showDialog(
@@ -128,7 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen>
 
     User? currentUser;
     // final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-    // bu global.dart'ın içinde tanımlandığı için burdan sildik
+    // bu global.dart'ın içinde tanımlandığı için burdan silindi !
     
     await firebaseAuth.createUserWithEmailAndPassword(
       email: emailController.text.trim(),
@@ -176,7 +176,6 @@ class _RegisterScreenState extends State<RegisterScreen>
       "email": currentUser.email,
       "name": nameController.text.trim(),
       "photoUrl": sellerImageUrl,
-      // register sayfasında phone olması gerektigini dusunuyorum
       "phone": phoneController.text.trim(),
       "status": "approved",
       "userCart": ['garbage.value'],
@@ -197,10 +196,10 @@ class _RegisterScreenState extends State<RegisterScreen>
 
 
 
-// enable false olunca, bosluklara yazi yazilmiyor herhangibir sey
+// enable false olunca, bosluklara yazi yazilmamaktadır
   @override
   Widget build(BuildContext context) {
-    // Sign up sayfasinda resim ayarlanan kisim
+    // Sign up sayfasinda resim ayarlanan kısım
     return SingleChildScrollView(
       child: Container(
         child: Column(
@@ -269,8 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen>
             ),
             const SizedBox(height: 15,),
             ElevatedButton(
-              // bu kısımda flutter kendi düzenleme yaptı satırların yeri degisik gelebilir ayni kod
-              //sadece karmaşa olmasın diye flutter düzenledi
+
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pink[300],
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
@@ -284,7 +282,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),
               ),
             ),
-            const SizedBox(height: 15,), // sign up butonu çok aşağıdaydı bu satırı ekledim
+            const SizedBox(height: 15,),
           ],
         ),
       ),

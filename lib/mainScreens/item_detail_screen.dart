@@ -18,8 +18,6 @@ class ItemDetailScreen extends StatefulWidget
 }
 
 
-
-
 class _ItemDetailScreenState extends State<ItemDetailScreen>
 {
   TextEditingController counterTextEditingController = TextEditingController();

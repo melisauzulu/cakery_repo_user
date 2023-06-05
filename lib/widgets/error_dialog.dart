@@ -6,7 +6,7 @@ class ErrorDialog extends StatelessWidget {
   ErrorDialog({this.message});
 
 // Satıcı kayıt olmaya çalıştığında resm yüklemezse vey şifre doğrulamasını yanlış girerse veya
-  // doldurması gerekn alanları doldurmazsa uyarı mesajı çıkmasını sağlayan kısım bu kısım !!
+  // doldurması gereken alanları doldurmazsa uyarı mesajı çıkmasını sağlayan kısım  !!
 
   @override
   Widget build(BuildContext context) {

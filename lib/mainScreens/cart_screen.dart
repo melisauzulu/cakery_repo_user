@@ -82,7 +82,8 @@ class _CartScreenState extends State<CartScreen> {
         automaticallyImplyLeading: true,
         actions: [
 
-          // whenever you want to add a button or a text widget at the right side of an appBar in flutter, the news basically this atciton
+          // whenever you want to add a button or a text widget at the right side of an appBar in flutter,
+          // the news basically this atciton
 
           Stack(
             children: [

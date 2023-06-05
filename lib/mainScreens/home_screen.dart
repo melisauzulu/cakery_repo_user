@@ -136,8 +136,6 @@ class _HomeScreenState extends State<HomeScreen> {
                          autoPlayAnimationDuration: const Duration(milliseconds: 600),
                          autoPlayCurve: Curves.easeInOut,
                          enlargeCenterPage: true,
-
-
                         //enlargeFactor: 0.3,
                          scrollDirection: Axis.horizontal,
                     ),
@@ -197,9 +195,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   model:sModel,
                   context: context,
 
-
-
-
                   );
 
          },
@@ -211,8 +206,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           }
           ),
-
-
 
           ],
 

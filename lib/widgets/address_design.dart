@@ -54,7 +54,7 @@ class _AddressDesignState extends State<AddressDesign>
                   activeColor: Colors.pinkAccent,
                   onChanged: (val)
                   {
-                    //providder
+                    //provider
                     Provider.of<AddressChanger>(context, listen: false).displayResult(val);
                     print(val);
                   },
@@ -171,8 +171,6 @@ class _AddressDesignState extends State<AddressDesign>
                             )
                         )
                         );
-
-
 
                       },
 

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/widgets/app_bar.dart';
@@ -28,14 +27,14 @@ class CustomCarptim extends StatefulWidget
 }
 
 class _CustomCarptimState extends State<CustomCarptim> {
-  Items? model; //MEL: Bence items için model ve modelX oluşturmak konseptinde bi yerde sıçtık ya. Neden 2 tane model oluşturduk?
+  Items? model;
   Sellers? modelSeller;
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
 
   TextEditingController shortInfoController = TextEditingController();
   TextEditingController titleController = TextEditingController();
-  TextEditingController priceController = TextEditingController(); //MEL: price için de bir controller oluşturdum.
+  TextEditingController priceController = TextEditingController();
   TextEditingController counterTextEditingController = TextEditingController();
 
   final List<String> flavorOptions = [
@@ -109,10 +108,7 @@ class _CustomCarptimState extends State<CustomCarptim> {
             ),
             
             onPressed: uploading ? null : () => validateUploadForm(),
-            
-//            onPressed: false ? null : () => addItemToCart(uniqueIdName, context, 1),
-           // Fluttertoast.showToast(
-           // msg: uniqueIdName.toString()),
+
             // we are cheking that if uploading is true there and doing nothing means nothing else do validateUploadForm
           ),
         ],
@@ -307,45 +303,8 @@ class _CustomCarptimState extends State<CustomCarptim> {
                     ),
                     onPressed: () {
 
-                      /* MEL:
-
-                      1-Check if item already exists in cart.
-                      2-Add to cart
-
-                      */
-
                       //TODO: If cake already on approval this can cause an error so check same cake
                       validateUploadForm();
-
-                        /*
-                       int itemCounter=1;
-                    List<String> separateItemIDsList = separateItemIDs();
-                    separateItemIDsList.contains(uniqueIdName)
-                        ? Fluttertoast.showToast(msg: "Item is already in cart.")
-                        : validateUploadForm();
-                      */
-
-
-                      /*
-                      setModel();
-
-                   //1-check if the item exists already in cart
-                   // we assign that list to our  this list, which is why them separate item id list
-                   List<String> separateItemIDsList = separateItemIDs();
-                   //we can say if the seven item id list contains the item already, then it means that product is already
-                   //item ID does not contain the counter
-
-                   separateItemIDsList.contains(modelX?.itemID)
-                       ? Fluttertoast.showToast(msg: "Item is already in cart.")
-                       :
-
-                   //2- call add to cart function
-                   addItemToCart(modelX?.itemID, context, 1);
-                    */
-
-                    //validateUploadForm();
-                    //addItemToCart(uniqueIdName,context,1);
-
 
                     },
                   )
@@ -366,7 +325,7 @@ class _CustomCarptimState extends State<CustomCarptim> {
       shortInfoController.clear();
       titleController.clear();
       imageXFile = null;
-      priceController.clear(); //MEL
+      priceController.clear();
     });
   }
 
@@ -471,19 +430,7 @@ class _CustomCarptimState extends State<CustomCarptim> {
       "sellerUID": widget.modelSeller?.sellerUID!, 
       "userID": sharedPreferences!.getString("uid")!,
       "status": "waiting",
-      /*
-      "shortInfo": shortInfoController.text.toString(),
-      "title": titleController.text.toString(),
-      "serving": selectedSize,
-      "selectedFlavor": selectedFlavor,
-      "selectedTopping": selectedTopping,
-      "selectedOrderType": selectedOrderType,
-      "publishDate": DateTime.now(),
-      "status": "available",
-      "responseMessage": "waiting",
-      "thumbnailUrl": downloadUrl,
-      */
-       //MEL: Price info da database'e yazılsın.
+
     }).then((value) {
       //save it as a main items collection
       final itemsRef = FirebaseFirestore.instance.collection("items");
@@ -504,7 +451,6 @@ class _CustomCarptimState extends State<CustomCarptim> {
         "thumbnailUrl": downloadUrl,
         "price": 0,
         "quantity":int.parse(counterTextEditingController.text),
-         //MEL: Price info da database'e yazılsın.
       });
     }).then((value) {
       clearMenusUploadForm();
@@ -537,9 +483,6 @@ class _CustomCarptimState extends State<CustomCarptim> {
     downloadURL = await taskSnapshot.ref.getDownloadURL();
     return downloadURL;
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {

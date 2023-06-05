@@ -16,7 +16,7 @@ class TextWidgetHeader extends SliverPersistentHeaderDelegate {
                 gradient: LinearGradient(
                     colors: [
                       Colors.pinkAccent,
-                      Colors.white, //MELİSAYA NOT BU GRİYDİ!!
+                      Colors.white,
                     ],
                   begin: const FractionalOffset(0.0, 0.0),
                   end: const FractionalOffset(2.0, 2.0),

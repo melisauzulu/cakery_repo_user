@@ -25,36 +25,7 @@ class SaveAddressScreen extends StatelessWidget {
   LocationPermission? permission; // !!!!!!!! ÖNEMLİ
   String completeAddress = "";
 
-/* ALİNİN KOD KALSIN BURDA !!! BELKİ REVİZE YAPARIZ
-  List<Placemark>? placemarks;
-  Position? position;
 
-  //function to get the location from user 
-  //for saving the address
-  getUserLocationAddress() async
-  {
-    Position newPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high
-    );
-
-    position = newPosition;
-
-    placemarks = await placemarkFromCoordinates(
-        position!.latitude, position!.longitude
-
-    );
-
-    Placemark pMark = placemarks![0];
-
-    String fullAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
-
-    _locationController.text = fullAddress;
-    _flatNumber.text = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}';
-    _city.text = '${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}';
-    _state.text = '${pMark.country}';
-    _completeAddress.text = fullAddress;
-  }
-*/
   Future<Position?> getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;

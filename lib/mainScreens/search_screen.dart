@@ -21,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen>
 
   initSearchingRestaurant(String textEntered) async
   {
-    // is grater kısmını değiştirirsen arama kısmında sana farklı sonuçlar gösterebilir , test edilebilir !!!
+    // is grater kısmını değiştirirsen arama kısmında sana farklı sonuçlar gösterebilir,
     // isGreaterThanOrEqualTo,  if it has something matching something small words similar also displayed those results
     restaurantsDocumentsList = FirebaseFirestore.instance
         .collection("sellers")

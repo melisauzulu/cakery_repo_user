@@ -20,10 +20,8 @@ import 'CustomCarptim.dart';
 class MenusScreen extends StatefulWidget {
   final Sellers? model;
    final Items? model_item;
-  MenusScreen({this.model, this.model_item}); //MEL: buraya bi de item model ekledim.
+  MenusScreen({this.model, this.model_item});
 
- 
- 
 
 
   @override
@@ -91,7 +89,7 @@ class _MenusScreenState extends State<MenusScreen> {
             onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (c) => CustomCarptim(model: widget.model_item, modelSeller: widget.model ))); //MEL: model: widget.model_item ekledim.
 
-              //code here
+
             },
           ),
           Expanded(
