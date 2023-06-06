@@ -31,7 +31,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
       body:CustomScrollView(
           slivers:[
 // menünün içindeki ürünleri gösteren kısım burada
-            SliverPersistentHeader(pinned:true, delegate: TextWidgetHeader(title: "Items of" + widget.model!.menuTitle.toString())),
+            SliverPersistentHeader(pinned:true, delegate: TextWidgetHeader(title: " " + widget.model!.menuTitle.toString())),
             StreamBuilder <QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("sellers")

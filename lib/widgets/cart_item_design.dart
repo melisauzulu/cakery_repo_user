@@ -25,16 +25,16 @@ class _CartItemDesignState extends State<CartItemDesign> {
     return InkWell(
       splashColor: Colors.pink,
       child: Padding(
-        padding: const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.all(3.0),
         child: Container(
-          height: 110,
+          height: 100,
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
 
               // image
-              Image.network(widget.model!.thumbnailUrl!, width: 140, height: 120,),
-              const SizedBox(width: 6,),
+              Image.network(widget.model!.thumbnailUrl!, width: 100, height: 120,),
+              const SizedBox(width: 5,),
 
               //title
               //quantity
@@ -50,7 +50,7 @@ class _CartItemDesignState extends State<CartItemDesign> {
                     widget.model!.title!,
                     style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 19,
+                      fontSize: 17,
                       fontFamily: "Kiwi"
                     ),
                   ),
