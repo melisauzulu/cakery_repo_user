@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
+import 'package:cakery_app_users_app/mainScreens/items_screen.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/widgets/app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -89,15 +90,15 @@ class _CustomCarptimState extends State<CustomCarptim> {
             color: Colors.white,
           ),
           onPressed: () {
-            
-            clearMenusUploadForm();
+
+            Navigator.push(context, MaterialPageRoute(builder: (c) =>  const HomeScreen()));
           },
         ),
         actions: [
           TextButton(
             child: const Text(
               // add butonuna tıkladığımızda yapabileceğimiz aksiyonları gösterdiğimiz kısım
-              "Add",
+              " ",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -170,7 +171,7 @@ class _CustomCarptimState extends State<CustomCarptim> {
                       style: const TextStyle(color: Colors.black),
                       controller: titleController,
                       decoration: const InputDecoration(
-                        hintText: "Item title",
+                        hintText: "Custom Item Title",
                         hintStyle: TextStyle(color: Colors.grey),
                         border: InputBorder.none,
                       ),
@@ -289,7 +290,7 @@ class _CustomCarptimState extends State<CustomCarptim> {
                       "Send Cake For Approval",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 21,
                       ),
                     ),
                     style: ButtonStyle(

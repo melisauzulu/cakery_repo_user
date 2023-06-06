@@ -4,6 +4,7 @@ import 'package:cakery_app_users_app/assistantMethods/assistant_methods.dart';
 import 'package:cakery_app_users_app/assistantMethods/total_amount.dart';
 import 'package:cakery_app_users_app/global/global.dart';
 import 'package:cakery_app_users_app/mainScreens/address_screen.dart';
+import 'package:cakery_app_users_app/mainScreens/home_screen.dart';
 import 'package:cakery_app_users_app/models/items.dart';
 import 'package:cakery_app_users_app/splashScreen/splash_screen.dart';
 import 'package:cakery_app_users_app/widgets/app_bar.dart';
@@ -152,7 +153,7 @@ class _CartScreenState extends State<CartScreen> {
                   clearCustomCartNow(context,sharedPreferences!.getString("uid").toString() ,widget.sellerUID.toString());
 
 
-                  Navigator.push(context, MaterialPageRoute(builder: (c) => const MySplashScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (c) => const HomeScreen()));
 
                   //display message
                   Fluttertoast.showToast(msg: "Cart has been cleared. ");
